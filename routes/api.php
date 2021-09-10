@@ -29,5 +29,5 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
 
-// Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
-// Route::post('reset-password', [NewPasswordController::class, 'reset']);
+Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::post('reset-password', [NewPasswordController::class, 'reset']);

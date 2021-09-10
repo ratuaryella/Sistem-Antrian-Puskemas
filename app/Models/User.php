@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'email_verified_at',
+        'nomor_induk',
+        'id_poli',
     ];
 
     /**
@@ -48,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
 
-        $url = 'https://spa.test/reset-password?token=' . $token;
+        $url = 'https://localhost:8000/reset-password?token=' . $token;
 
         $this->notify(new ResetPasswordNotification($url));
     }
