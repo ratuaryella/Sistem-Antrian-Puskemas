@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::get('/login', function () {
 Route::get('/registrasi', function () {
     return view('registrasi');
 });
+
+Route::get('/dashboard', [UserController::class, 'index']);
