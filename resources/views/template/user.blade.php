@@ -22,7 +22,14 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <div class="wrap">
-                        <a href="#" class="button"></i>Logout</a>
+                        @auth
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="nav-link" type="submit">
+                                {{ __('Logout') }}
+                            </button>
+                        </form>
+                        @endauth
                     </div>
                 </li>
             </ul>

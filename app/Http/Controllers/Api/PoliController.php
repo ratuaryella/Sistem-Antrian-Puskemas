@@ -13,8 +13,6 @@ class PoliController extends Controller
     public function getAllPoli()
     {
         $allPoli = DB::table('poli')->get();
-        return response()->json([
-            'allPoli' => $allPoli,
-        ]);
+        return response()->json($allPoli);
     }
 }
