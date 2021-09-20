@@ -29,7 +29,6 @@ class AntrianController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -40,19 +39,22 @@ class AntrianController extends Controller
      */
     public function store(Request $request)
     {
+        $tanggal = date();
+        $req = session()->get('user');
+        $req = $req->id_user;
+
         $antrian  = new Antrian();
         $antrian->id_antrian = $request->id_antrian;
-        $antrian->id_user = $request->id_user;
+        $antrian->id_user = $req->id_user;
         $antrian->no_antrian = $request->no_antrian;
         $antrian->id_poli = $request->id_poli;
-        $antrian->tanggal = $request->tanggal;
+        $antrian->tanggal = $tanggal;
         $antrian->status = $request->status;
         $antrian->save();
 
         return response()->json([
             'message' => 'Success'
         ], 201);
-
     }
 
     /**
@@ -66,10 +68,10 @@ class AntrianController extends Controller
         $antrian = Antrian::findOrfail($id);
 
         return response()->json([
-            'success'=>true,
-            'message'=> 'Detail Antrian',
-            'data'=> $antrian
-        ],200);
+            'success' => true,
+            'message' => 'Detail Antrian',
+            'data' => $antrian
+        ], 200);
     }
 
     /**
@@ -93,7 +95,7 @@ class AntrianController extends Controller
     public function update(Request $request, $id)
     {
         //
-       
+
     }
 
     /**

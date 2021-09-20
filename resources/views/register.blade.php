@@ -7,7 +7,28 @@
     <div class="contentBx">
         <div class="formBx">
             <h3><strong>Sistem Antrian Puskesmas</strong></h3>
-            <form method="post">
+            <form method="post" action="{{ route('register') }}">
+                @csrf
+                @if(session('errors'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Something it's wrong:
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+                @if (Session::has('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+                @endif
                 <div class="inputBx">
                     <label for="inputName">Name</label>
                     <input type="text" name="name" id="inputName" class="form-control" required autofocus>
@@ -23,15 +44,10 @@
                 <div class="inputBx">
                     <label for="inputPassword">Password</label>
                     <input type="password" name="password" id="inputPassword" class="form-control @error('password') is-invalid @enderror" required>
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="inputBx">
                     <label for="inputPassword">Confirm Password</label>
-                    <input type="password" name="password" id="password_confirmation" class="form-control  @error('password') is-invalid @enderror" required>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control  @error('password') is-invalid @enderror" required>
                 </div>
 
                 <button class="btn btn-lg btn-primary" type="submit">

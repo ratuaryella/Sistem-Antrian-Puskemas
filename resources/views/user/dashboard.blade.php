@@ -16,11 +16,11 @@
         <hr>
         <form>
             <div class="mb-3">
-                <label for="poli" class="form-label">Poli</label>>
-                <select class="form-select" id="poli-option" placeholder="Silahkan pilih poli">
-                    <option selected>Open this select menu</option>
-                    @foreach ($responses as $response)
-                    <option value="{{ $response->id_poli }}">{{ $response->nama }}</option>
+                <label for="poli" class="form-label">Poli</label>
+                <select class="form-select" id="poli-option">
+                    <option selected>Silahkan pilih poli</option>
+                    @foreach ($allPoli as $response)
+                    <option value="{{ $response->id_poli }}"> {{ $response->nama }} </option>
                     @endforeach
                 </select>
             </div>
