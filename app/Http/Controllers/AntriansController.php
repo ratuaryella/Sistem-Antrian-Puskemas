@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Antrian;
+use App\Models\Antrians;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class AntrianController extends Controller
+
+class AntriansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class AntrianController extends Controller
      */
     public function index()
     {
-        $antrian =  Antrian::all();
+        $antrian =  Antrians::all();
 
         return response()->json([
             'message' => 'Success',
@@ -37,24 +39,37 @@ class AntrianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $tanggal = date();
-        $req = session()->get('user');
-        $req = $req->id_user;
+        $tanggal = Carbon::now()->toDateString();
+        $antrian_terakhir = Antrians::all()->last();
+        $tanggal_terakhir = $antrian_terakhir->get('tanggal');
 
-        $antrian  = new Antrian();
-        $antrian->id_antrian = $request->id_antrian;
-        $antrian->id_user = $req->id_user;
-        $antrian->no_antrian = $request->no_antrian;
-        $antrian->id_poli = $request->id_poli;
-        $antrian->tanggal = $tanggal;
-        $antrian->status = $request->status;
-        $antrian->save();
+        if ($tanggal_terakhir == $tanggal) {
+            $no_terakhir = $antrian_terakhir->get('no_antrian') + 1;
+            return $no_terakhir;
+        } else {
+            $no_terakhir = $antrian_terakhir->get('no_antrian');
+            return $no_terakhir;
+        }
 
-        return response()->json([
-            'message' => 'Success'
-        ], 201);
+        // $req = session()->get('user');
+        // $req = $req->id_user;
+
+
+
+
+        // $antrian  = new Antrians();
+        // $antrian->id_antrian = $request->id_antrian;
+        // $antrian->id_user = $req->id_user;
+        // $antrian->no_antrian = $request->no_antrian;
+        // $antrian->id_poli = $request->id_poli;
+        // $antrian->tanggal = $tanggal;
+        // $antrian->status = $request->status;
+        // $antrian->save();
+
+        // 
+
     }
 
     /**
@@ -65,7 +80,7 @@ class AntrianController extends Controller
      */
     public function show($id)
     {
-        $antrian = Antrian::findOrfail($id);
+        $antrian = Antrians::findOrfail($id);
 
         return response()->json([
             'success' => true,

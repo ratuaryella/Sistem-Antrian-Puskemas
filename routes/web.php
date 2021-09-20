@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AntriansController;
+use Carbon\Carbon;
+use App\Models\Antrians;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,23 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/greeting', function () {
+
+    $tanggal = Carbon::now()->toDateString();
+    $tanggal_terakhir = Antrians::all()->last()->get('tanggal');
+    $data = json_encode($tanggal_terakhir);
+
+
+    if ($data == $tanggal) {
+        return "true";
+    } else {
+
+        return var_dump($data);
+    }
+});
+
+
 
 Route::get('/', [UserController::class, 'index'])->name('/');
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('register');
