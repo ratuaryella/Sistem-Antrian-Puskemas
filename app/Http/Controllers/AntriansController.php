@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Antrians;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class AntriansController extends Controller
 {
+
+    // private $connection;
+
+    // public function __construct(Connection $connection)
+    // {
+    //     $this->connection = $connection;
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -39,37 +46,37 @@ class AntriansController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $tanggal = Carbon::now()->toDateString();
-        $antrian_terakhir = Antrians::all()->last();
-        $tanggal_terakhir = $antrian_terakhir->get('tanggal');
+        $tanggal = Carbon::now();
+        $req = session()->get('user');
+        $req = $req->id;
 
-        if ($tanggal_terakhir == $tanggal) {
-            $no_terakhir = $antrian_terakhir->get('no_antrian') + 1;
-            return $no_terakhir;
+
+        $id_terakhir = DB::table('antrians')
+            ->select(DB::raw('MAX(id_antrian) as id_antrian'), 'no_antrian', 'id_poli', 'tanggal')
+            ->groupBy('id_poli')
+            ->having('id_poli', $request->id_poli)
+            ->get();
+
+        $no_terakhir = 1;
+
+        if ($id_terakhir[0]->tanggal != $tanggal) {
+            $no_terakhir = $id_terakhir[0]->id_antrian + 1;
+            $no_terakhir = strval($request->id_poli) .  strval($no_terakhir);
         } else {
-            $no_terakhir = $antrian_terakhir->get('no_antrian');
-            return $no_terakhir;
+            $no_terakhir = strval($request->id_poli) .  strval($no_terakhir);
         }
 
-        // $req = session()->get('user');
-        // $req = $req->id_user;
+        $antrian  = new Antrians();
+        $antrian->id_user = $req;
+        $antrian->no_antrian = $no_terakhir;
+        $antrian->id_poli = $request->id_poli;
+        $antrian->tanggal = $tanggal;
+        $antrian->status = 0;
+        $antrian->save();
 
-
-
-
-        // $antrian  = new Antrians();
-        // $antrian->id_antrian = $request->id_antrian;
-        // $antrian->id_user = $req->id_user;
-        // $antrian->no_antrian = $request->no_antrian;
-        // $antrian->id_poli = $request->id_poli;
-        // $antrian->tanggal = $tanggal;
-        // $antrian->status = $request->status;
-        // $antrian->save();
-
-        // 
-
+        return redirect()->route('/');
     }
 
     /**

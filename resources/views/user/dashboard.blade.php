@@ -14,17 +14,18 @@
     <div class="col-antri">
         <h3>Ambil Antrian </h3>
         <hr>
-        <form>
-            <div class="mb-3">
+        <form action="{{ route('posts.store') }}" method="POST">
+            {{ csrf_field() }}
+            <div class="form-group">
                 <label for="poli" class="form-label">Poli</label>
-                <select class="form-select" id="poli-option">
+                <select class="form-select" id="id_poli" name="id_poli">
                     <option selected>Silahkan pilih poli</option>
-                    @foreach ($allPoli as $response)
-                    <option value="{{ $response->id_poli }}"> {{ $response->nama }} </option>
+                    @foreach ($allPoli as $poli)
+                    <option value="{{ $poli->id_poli }}" name="id_poli"> {{ $poli->nama }} </option>
                     @endforeach
                 </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
     </div>

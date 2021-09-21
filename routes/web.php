@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AntriansController;
-use Carbon\Carbon;
-use App\Models\Antrians;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,26 +18,14 @@ use App\Models\Antrians;
 |
 */
 
-Route::get('/greeting', function () {
-
-    $tanggal = Carbon::now()->toDateString();
-    $tanggal_terakhir = Antrians::all()->last()->get('tanggal');
-    $data = json_encode($tanggal_terakhir);
-
-
-    if ($data == $tanggal) {
-        return "true";
-    } else {
-
-        return var_dump($data);
-    }
-});
-
-
-
+Route::resource('/posts', AntriansController::class);
 Route::get('/', [UserController::class, 'index'])->name('/');
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout'])->name('/logout');
+// Route::post('/logout', [
+//     'uses' => 'App\Http\Controllers\AuthController@logout',
+//     'as'   => '/logout'
+// ])->middleware('auth:sanctum');
