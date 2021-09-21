@@ -7,7 +7,15 @@
             Nomor Antrian Anda
         </div>
         <div class="card-body">
-            <h1 class="card-title">2020</h1>
+            @foreach($antrian as $oneAntri)
+            <h1 class="card-title">{{ $oneAntri->no_antrian }}</h1>
+            @foreach ($allPoli as $poli)
+            @if($oneAntri->id_poli == $poli->id_poli)
+            <p>Anda mengantri untuk poli {{ $poli->nama }}</p>
+            @endif
+            @endforeach
+            @endforeach
+
         </div>
     </div>
 
