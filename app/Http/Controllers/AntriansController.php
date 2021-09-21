@@ -132,7 +132,9 @@ class AntriansController extends Controller
     }
 
     public function show_antrian(){
-        $date = Carbon::now();
 
+        $antrian = DB::table('antrians')->whereDate('tanggal',Carbon::today()->get());
+
+        return view('admin', $antrian);
     }
 }
