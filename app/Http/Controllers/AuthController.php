@@ -71,23 +71,20 @@ class AuthController extends Controller
                 'token' => $token->plainTextToken
             ]
         ]);
-        session(['user' => $request->user()]);
 
 
-        // if (!$result->isEmpty()) {
-        //     return redirect()->route('/');
-        // } else {
 
-        $res = json_decode($request->user());
-        $nama = session()->get('user');
-        $nama = $nama->nomor_induk;
-        return var_dump($nama);
-        // }
+        if (!$result->isEmpty()) {
+            session(['user' => $request->user()]);
+            return redirect()->route('/');
+        } else {
+
+            return redirect()->route('login');
+        }
     }
 
     public function logout(Request $request)
     {
-
         $request->user()->tokens()->delete();
         Auth::logout();
 

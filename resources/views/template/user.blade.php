@@ -22,15 +22,13 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <div class="wrap">
-                        @auth
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="nav-link" type="submit">
-                                {{ __('Logout') }}
-                            </button>
-                        </form>
-                        @endauth
+                        <a href="{{ route('/logout') }}" class="button" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}</a>
                     </div>
+                    <form id="logout-form" action="{{ route('/logout') }}" method="POST" class="d-none">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
             </ul>
         </div>
