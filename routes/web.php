@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AntriansController;
 
 
@@ -24,8 +25,8 @@ Route::get('/register', [AuthController::class, 'showFormRegister'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('/logout');
-// Route::post('/logout', [
-//     'uses' => 'App\Http\Controllers\AuthController@logout',
-//     'as'   => '/logout'
-// ])->middleware('auth:sanctum');
+
+//Admin
+Route::get('/admin', [AdminController::class, 'admin']);
