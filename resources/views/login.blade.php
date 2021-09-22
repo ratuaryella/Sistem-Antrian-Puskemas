@@ -37,11 +37,15 @@
                     <label for="inputPassword">Password</label>
                     <input type="password" name="password" id="inputPassword" class="form-control @error('password') is-invalid @enderror" required>
                 </div>
+                <a href="{{ route('register') }}" style="margin-left: 1px"> Lupa password </a>
                 <button class="btn btn-lg btn-primary" type="submit">
                     Masuk
                 </button>
             </form>
+            <br>
+            <center><a href="{{ route('register') }}"> Daftar Akun </a></center>
         </div>
     </div>
+
 </section>
 @endsection

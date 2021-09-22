@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class AntriansController extends Controller
 {
 
@@ -50,22 +52,33 @@ class AntriansController extends Controller
     {
         $tanggal = Carbon::now();
         $req = session()->get('user');
-        $req = $req->id;
 
+        // if (isEmpty($req)) {
+        //     return redirect()->route('login');
+        // }
+
+        $req = $req->id;
+        $id_terakhir_poliBased = DB::table('antrians')
+            ->where('id_poli', $request->id_poli)
+            ->max('id_antrian');
 
         $id_terakhir = DB::table('antrians')
-            ->select(DB::raw('MAX(id_antrian) as id_antrian'), 'no_antrian', 'id_poli', 'tanggal')
-            ->groupBy('id_poli')
-            ->having('id_poli', $request->id_poli)
+            ->where('id_antrian', $id_terakhir_poliBased)
             ->get();
 
         $no_terakhir = 1;
 
-        if ($id_terakhir[0]->tanggal != $tanggal) {
-            $no_terakhir = $id_terakhir[0]->id_antrian + 1;
-            $no_terakhir = strval($request->id_poli) .  strval($no_terakhir);
+        if ($id_terakhir->isEmpty()) {
+            $no_terakhir = $request->id_poli  . "-" . strval($no_terakhir);
+        } elseif ($id_terakhir[0]->tanggal != $tanggal) {
+            $value = ltrim($id_terakhir[0]->no_antrian, $request->id_poli);
+            $value = ltrim($value, "-");
+            $value = intval($value);
+            $no_terakhir =  $value + 1;
+            $no_terakhir = $request->id_poli . "-" . strval($no_terakhir);
         } else {
-            $no_terakhir = strval($request->id_poli) .  strval($no_terakhir);
+            $value = ltrim($id_terakhir[0]->no_antrian, $request->id_poli . "-");
+            $no_terakhir = $request->id_poli . strval($no_terakhir);
         }
 
         $antrian  = new Antrians();
@@ -131,10 +144,7 @@ class AntriansController extends Controller
         //
     }
 
-    public function show_antrian(){
-
-        $antrian = DB::table('antrians')->whereDate('tanggal',Carbon::today()->get());
-
-        return view('admin', $antrian);
+    public function show_antrian()
+    {
     }
 }
