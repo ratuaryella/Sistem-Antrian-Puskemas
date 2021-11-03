@@ -13,20 +13,37 @@ use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class NewPasswordController extends Controller
 {
+
+    public function showFormForgotPass()
+    {
+        return view('forgotPassword');
+    }
+
+    public function token(Request $request)
+    {
+        $getToken = $request->token;
+        session(['token' => $getToken]);
+        $token = session()->get('token');
+        // return var_dump($token);
+        return redirect()->route('reset-password');
+    }
+
     public function forgotPassword(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'required|email',
-        // ]);
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
 
         $status = Password::sendResetLink(
             $request->only('email')
         );
 
         if ($status == Password::RESET_LINK_SENT) {
-            return [
-                'status' => __($status)
-            ];
+
+            echo '<script>alert("Link berhasil dikirim")</script>';
+
+            return redirect()->route('login');
         }
 
         throw ValidationException::withMessages([
@@ -34,13 +51,24 @@ class NewPasswordController extends Controller
         ]);
     }
 
+
+    public function showFormResetPass()
+    {
+        return view('setPassword');
+    }
+
     public function reset(Request $request)
     {
-        // $request->validate([
-        //     'token' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => ['required', 'confirmed', RulesPassword::defaults()],
-        // ]);
+        $token = session()->get('token');
+        $request->request->add(['token' => $token]);
+
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed', RulesPassword::defaults()],
+        ]);
+
+        // return var_dump($request->token);
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
@@ -57,13 +85,7 @@ class NewPasswordController extends Controller
         );
 
         if ($status == Password::PASSWORD_RESET) {
-            return response([
-                'message' => 'Password reset successfully'
-            ]);
+            return redirect()->route('login');
         }
-
-        return response([
-            'message' => __($status)
-        ], 500);
     }
 }

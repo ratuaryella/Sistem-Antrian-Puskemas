@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\Rules\Password;
+use Auth;
 
 
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => ['required', 'confirmed', Password::defaults()],
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'nomor_induk' => 'required|int',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
 
         $user = User::create([
             'name' => $request->name,
@@ -45,11 +48,17 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
 
-        $request->authenticate();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $res = $request->authenticate();
+
 
         $token = $request->user()->createToken('authtoken');
 
-        return response()->json([
+        return  $res = response()->json([
             'message' => 'Logged in',
             'data' => [
                 'user' => $request->user(),

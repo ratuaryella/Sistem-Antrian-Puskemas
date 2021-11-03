@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\AntrianController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PoliController;
-use App\Models\User;
 use App\Http\Controllers\Api\EmailVerificationController;
 use App\Http\Controllers\Api\NewPasswordController;
 
@@ -32,7 +30,10 @@ Route::post('email/verification-notification', [EmailVerificationController::cla
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
 
 Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
-Route::post('reset-password', [NewPasswordController::class, 'reset']);
+Route::get('reset', [NewPasswordController::class, 'token']);
 
-Route::resource('antrian', AntrianController::class);
-Route::get('all-poli', [PoliController::class, 'getAllPoli']);
+Route::get('poli', [PoliController::class, 'getAllPoli']);
+Route::get('antrian', [PoliController::class, 'showAntrianById']);
+Route::get('semua-antrian', [PoliController::class, 'getAllAntrian']);
+Route::post('tambah', [PoliController::class, 'addAntrian']);
+Route::post('ubah-status', [PoliController::class, 'updateStatus']);

@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AntriansController;
+use App\Http\Controllers\NewPasswordController;
 
 
 
@@ -27,6 +28,12 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('/logout');
+Route::get('/forgot-password', [NewPasswordController::class, 'showFormForgotPass'])->name('forgot-password');
+Route::post('/forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::get('/token', [NewPasswordController::class, 'token'])->name('token');
+Route::get('/reset-password', [NewPasswordController::class, 'showFormResetPass'])->name('reset-password');
+Route::post('/reset-password', [NewPasswordController::class, 'reset']);
+
 
 //Admin
 Route::get('/admin', [AdminController::class, 'admin']);

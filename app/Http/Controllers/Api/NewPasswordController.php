@@ -9,10 +9,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class NewPasswordController extends Controller
 {
+    public function token(Request $request)
+    {
+        $getToken = $request->token;
+        return response()->json($getToken);
+    }
+
     public function forgotPassword(Request $request)
     {
         // $request->validate([

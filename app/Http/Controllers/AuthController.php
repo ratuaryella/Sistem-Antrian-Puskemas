@@ -90,4 +90,37 @@ class AuthController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function showFormForgotPass()
+    {
+        return view('login');
+    }
+
+    // public function login(LoginRequest $request)
+    // {
+
+
+    //     $request->authenticate();
+
+    //     $token = $request->user()->createToken('authtoken');
+
+
+    //     $result = response()->json([
+    //         'message' => 'Logged in',
+    //         'data' => [
+    //             'user' => $request->user(),
+    //             'token' => $token->plainTextToken
+    //         ]
+    //     ]);
+
+
+
+    //     if (!$result->isEmpty()) {
+    //         session(['user' => $request->user()]);
+    //         return redirect()->route('/');
+    //     } else {
+
+    //         return redirect()->route('login');
+    //     }
+    // }
 }
