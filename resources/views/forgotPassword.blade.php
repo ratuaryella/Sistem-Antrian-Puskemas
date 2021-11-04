@@ -4,7 +4,7 @@
 <div class="contentBx">
     <div class="formBx">
         <h3><strong>Sistem Antrian Puskesmas</strong></h3>
-        <form method="post" action="{{ route('register') }}">
+        <form method="post" action="{{ route('forgot-password') }}">
             @csrf
             @if(session('errors'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -27,31 +27,17 @@
             </div>
             @endif
             <div class="inputBx">
-                <label for="inputName">Name</label>
-                <input type="text" name="name" id="inputName" class="form-control" required autofocus>
-            </div>
-            <div class="inputBx">
                 <label for="inputEmail">Email</label>
                 <input type="text" name="email" id="inputEmail" class="form-control" required autofocus>
             </div>
-            <div class="inputBx">
-                <label for="inputNomorInduk">Nomor Induk Kependudukan</label>
-                <input type="text" name="nomor_induk" id="inputNomorInduk" class="form-control" required autofocus>
-            </div>
-            <div class="inputBx">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control @error('password') is-invalid @enderror" required>
-            </div>
-            <div class="inputBx">
-                <label for="inputPassword">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control  @error('password') is-invalid @enderror" required>
-            </div>
 
             <button class="btn btn-lg btn-primary" type="submit">
-                Masuk
+                Submit
             </button>
         </form>
+        <br>
     </div>
 </div>
+
 </section>
 @endsection
