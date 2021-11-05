@@ -41,8 +41,6 @@ class NewPasswordController extends Controller
 
         if ($status == Password::RESET_LINK_SENT) {
 
-            echo '<script>alert("Link berhasil dikirim")</script>';
-
             return redirect()->route('login');
         }
 

@@ -49,8 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $url = 'http://localhost:8000/token?token=' . $token;
 
-
-
         $this->notify(new ResetPasswordNotification($url));
     }
 }
