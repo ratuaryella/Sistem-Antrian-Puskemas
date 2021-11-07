@@ -17,22 +17,15 @@
             </a>
             <span class="tooltip">Antrian</span>
         </li>
-        <li class="<% if(typeof role != 'undefined') { %> hide <% }  %>">
-            <a href="/berita-guest" class="<% if(typeof active != 'undefined') { if (active == 'berita') { %> active <% } } %> <% if(typeof role != 'undefined') %> ">
-                <i class='fas fa-newspaper me-2' ></i>
-                <span class="links_name">Berita</span>
-            </a>
-            <span class="tooltip">Berita</span>
-        </li>
         <li class="">
-            <a href="/kegiatan-guest" class="">
+            <a href="/kelola-dokter" class="{{ Request::path() ==  'kelola-dokter' ? 'active' : ''  }}">
                 <i class='fas fa-user-md me-2' ></i>
                 <span class="links_name">Dokter</span>
             </a>
             <span class="tooltip">Kelola Dokter</span>
         </li>
         <li class="">
-            <a href="/kelola-lokasi" class="">
+            <a href="/kelola-poli" class="{{ Request::path() ==  'kelola-poli' ? 'active' : ''  }}">
                 <i class='fas fa-clinic-medical me-2' ></i>
                 <span class="links_name">Poli</span>
             </a>

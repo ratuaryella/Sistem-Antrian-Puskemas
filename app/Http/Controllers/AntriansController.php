@@ -144,7 +144,3 @@ class AntriansController extends Controller
         //
     }
 
-    public function show_antrian()
-    {
-    }
-}

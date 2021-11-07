@@ -33,9 +33,15 @@ Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'ver
 Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
 Route::post('reset', [NewPasswordController::class, 'reset']);
 
+
 Route::get('poli', [PoliController::class, 'getAllPoli']);
 Route::post('tambah', [PoliController::class, 'addAntrian']);
 
 Route::get('antrian', [AntrianController::class, 'showAntrianById']);
 Route::get('antrian-byPoli', [AntrianController::class, 'getAllAntrianByPoli']);
 Route::post('ubah-status', [AntrianController::class, 'updateStatus']);
+Route::post('ubah-status', [PoliController::class, 'updateStatus']);
+
+//Route::resource('antrian', AntrianController::class);
+Route::get('all-poli', [PoliController::class, 'getAllPoli']);
+
