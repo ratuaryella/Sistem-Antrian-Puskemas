@@ -40,5 +40,12 @@ Route::post('/reset-password', [NewPasswordController::class, 'reset']);
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/kelola-dokter', [AdminController::class, 'kelolaDokter']);
 Route::get('/kelola-poli', [AdminController::class, 'kelolaPoli']);
+Route::post('add-poli', [PoliController::class, 'store']);
+Route::get('edit-poli/{id}', [PoliController::class, 'edit']);
+Route::put('update-poli', [PoliController::class, 'update']);
+Route::delete('delete-poli', [PoliController::class, 'destroy']);
 
-Route::resource('/poli', PoliController::class);
+Route::post('add-dokter', [AdminController::class, 'store']);
+Route::get('edit-dokter/{id}', [AdminController::class, 'edit']);
+Route::delete('delete-dokter', [AdminController::class, 'destroy']);
+//Route::resource('/poli', PoliController::class);

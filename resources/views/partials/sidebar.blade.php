@@ -49,7 +49,7 @@
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <a class="button-login" href="/login">Log In</a>
+            <a class="button-login" href="/logout">Log Out</a>
 {{--            <% }else{ %>--}}
 {{--            <li class="nav-item dropdown" >--}}
 {{--                <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"--}}
