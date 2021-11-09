@@ -16,7 +16,7 @@ class UserController extends Controller
         if (Auth::check()) {
             $req = session()->get('user');
 
-            $allPoli = DB::table('poli')->get();
+            $allPoli = DB::table('polis')->get();
 
             $user = session()->get('user');
             $user = $user->id;

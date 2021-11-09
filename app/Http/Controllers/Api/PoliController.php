@@ -14,7 +14,7 @@ class PoliController extends Controller
     //Mengambil list semua poli
     public function getAllPoli()
     {
-        $allPoli = DB::table('poli')->get();
+        $allPoli = DB::table('polis')->get();
         return response()->json([
             'poli' => $allPoli
         ]);

@@ -72,13 +72,18 @@ class AuthController extends Controller
             ]
         ]);
 
-
-
         if (!$result->isEmpty()) {
             session(['user' => $request->user()]);
-            return redirect()->route('/');
-        } else {
+            $req = session()->get('user');
 
+            if ($req->id_role == 1) {
+                return redirect()->route('/admin');
+            } elseif ($req->id_role == 2) {
+                return redirect()->route('/');
+            } else {
+                return redirect()->route('/');
+            }
+        } else {
             return redirect()->route('login');
         }
     }
@@ -95,32 +100,4 @@ class AuthController extends Controller
     {
         return view('login');
     }
-
-    // public function login(LoginRequest $request)
-    // {
-
-
-    //     $request->authenticate();
-
-    //     $token = $request->user()->createToken('authtoken');
-
-
-    //     $result = response()->json([
-    //         'message' => 'Logged in',
-    //         'data' => [
-    //             'user' => $request->user(),
-    //             'token' => $token->plainTextToken
-    //         ]
-    //     ]);
-
-
-
-    //     if (!$result->isEmpty()) {
-    //         session(['user' => $request->user()]);
-    //         return redirect()->route('/');
-    //     } else {
-
-    //         return redirect()->route('login');
-    //     }
-    // }
 }

@@ -53,10 +53,6 @@ class AntriansController extends Controller
         $tanggal = Carbon::now();
         $req = session()->get('user');
 
-        // if (isEmpty($req)) {
-        //     return redirect()->route('login');
-        // }
-
         $req = $req->id;
         $id_terakhir_poliBased = DB::table('antrians')
             ->where('id_poli', $request->id_poli)
@@ -143,5 +139,4 @@ class AntriansController extends Controller
     {
         //
     }
-
 }

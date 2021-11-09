@@ -21,7 +21,7 @@ use App\Http\Controllers\NewPasswordController;
 |
 */
 
-//Route::resource('/posts', AntriansController::class);
+Route::resource('/posts', AntriansController::class);
 Route::get('/', [UserController::class, 'index'])->name('/');
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -34,10 +34,11 @@ Route::post('/forgot-password', [NewPasswordController::class, 'forgotPassword']
 Route::get('/token', [NewPasswordController::class, 'token'])->name('token');
 Route::get('/reset-password', [NewPasswordController::class, 'showFormResetPass'])->name('reset-password');
 Route::post('/reset-password', [NewPasswordController::class, 'reset']);
+// Route::resource('/poli', PoliController::class);
 
 
 //Admin
-Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin', [AdminController::class, 'index'])->name('/admin');
 Route::get('/kelola-dokter', [AdminController::class, 'kelolaDokter']);
 Route::get('/kelola-poli', [AdminController::class, 'kelolaPoli']);
 Route::post('add-poli', [PoliController::class, 'store']);
@@ -48,4 +49,5 @@ Route::delete('delete-poli', [PoliController::class, 'destroy']);
 Route::post('add-dokter', [AdminController::class, 'store']);
 Route::get('edit-dokter/{id}', [AdminController::class, 'edit']);
 Route::delete('delete-dokter', [AdminController::class, 'destroy']);
+
 //Route::resource('/poli', PoliController::class);
