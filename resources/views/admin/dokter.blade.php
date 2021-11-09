@@ -103,6 +103,7 @@
                 {{ method_field('PUT') }}
                 <div class="modal-body">
                     <div class="modal-body">
+                        <input type="hidden" name="idEdit" id="idEdit" class="form-control">
                         <div class="form-group">
                             <label>Nama</label>
                             <input type="text" name="namaEdit" id="namaEdit" class="form-control" placeholder="Nama">
@@ -182,6 +183,7 @@
                 , url: "/edit-dokter/" + id
                 , success: function(response) {
                     // console.log(response.poli);
+                    $('#idEdit').val(response.dokter.id);
                     $('#namaEdit').val(response.dokter.name);
                     $('#emailEdit').val(response.dokter.email);
                     $('#noindukEdit').val(response.dokter.nomor_induk);

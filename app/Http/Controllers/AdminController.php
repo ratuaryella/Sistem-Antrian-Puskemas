@@ -96,4 +96,18 @@ class AdminController
         }
         return redirect()->route('login');
     }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('idEdit');
+        User::where('id',$id)->update([
+                "name"=> $request->input('namaEdit'),
+                "email"=>$request->input('emailEdit'),
+                "nomor_induk"=> $request->input('noindukEdit'),
+                "id_poli"=>$request->input('poliEdit'),
+                "id_role"=>2]
+        );
+
+        return redirect()->back()->with('status', 'Data Berhasil Diubah');
+    }
 }
