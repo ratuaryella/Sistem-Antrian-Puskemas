@@ -11,7 +11,7 @@
             <h1 class="card-title">{{ $oneAntri->no_antrian }}</h1>
             @foreach ($allPoli as $poli)
             @if($oneAntri->id_poli == $poli->id_poli)
-            <p>Anda mengantri untuk poli {{ $poli->nama }}</p>
+            <p>Anda mengantri untuk {{ $poli->nama }}</p>
             @endif
             @endforeach
             @endforeach

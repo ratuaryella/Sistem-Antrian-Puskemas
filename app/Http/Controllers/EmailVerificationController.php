@@ -19,7 +19,7 @@ class EmailVerificationController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        return ['status' => 'ininya?'];
+        return ['status' => 'Email successfully sent.'];
     }
 
     public function verify(EmailVerificationRequest $request)

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
+use App;
+
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -15,6 +16,10 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             $req = session()->get('user');
+
+            if ($req->id_role != 3) {
+                App::abort(403);
+            }
 
             $allPoli = DB::table('polis')->get();
 
@@ -32,7 +37,7 @@ class UserController extends Controller
                 'allPoli' => $allPoli,
                 'antrian' => $antrian,
             ]);
-            // return var_dump($no_antrian);
+            // return var_dump($user);
         }
         return redirect()->route('login');
     }

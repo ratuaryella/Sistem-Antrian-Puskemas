@@ -25,7 +25,7 @@ class AntriansController extends Controller
      */
     public function index()
     {
-        $antrian = Antrians::all();
+        $antrian =  Antrians::all();
 
         return response()->json([
             'message' => 'Success',
@@ -45,7 +45,7 @@ class AntriansController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,19 +65,19 @@ class AntriansController extends Controller
         $no_terakhir = 1;
 
         if ($id_terakhir->isEmpty()) {
-            $no_terakhir = $request->id_poli . "-" . strval($no_terakhir);
+            $no_terakhir = $request->id_poli  . "-" . strval($no_terakhir);
         } elseif ($id_terakhir[0]->tanggal != $tanggal) {
             $value = ltrim($id_terakhir[0]->no_antrian, $request->id_poli);
             $value = ltrim($value, "-");
             $value = intval($value);
-            $no_terakhir = $value + 1;
+            $no_terakhir =  $value + 1;
             $no_terakhir = $request->id_poli . "-" . strval($no_terakhir);
         } else {
             $value = ltrim($id_terakhir[0]->no_antrian, $request->id_poli . "-");
             $no_terakhir = $request->id_poli . strval($no_terakhir);
         }
 
-        $antrian = new Antrians();
+        $antrian  = new Antrians();
         $antrian->id_user = $req;
         $antrian->no_antrian = $no_terakhir;
         $antrian->id_poli = $request->id_poli;
@@ -91,7 +91,7 @@ class AntriansController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -108,7 +108,7 @@ class AntriansController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -119,8 +119,8 @@ class AntriansController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -132,11 +132,15 @@ class AntriansController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function show_antrian()
+    {
     }
 }

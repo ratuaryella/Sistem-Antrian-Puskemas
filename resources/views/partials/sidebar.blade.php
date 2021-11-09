@@ -50,7 +50,7 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <div class="wrap">
-                <a href="{{ route('/logout') }}" class="button" onclick="event.preventDefault();
+                <a href="{{ route('/logout') }}" class="button-login" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}</a>
             </div>

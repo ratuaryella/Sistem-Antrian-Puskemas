@@ -28,6 +28,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'nomor_induk' => 'required|int',
             'password' => ['required', 'confirmed'],
         ]);
 
@@ -79,7 +80,7 @@ class AuthController extends Controller
             if ($req->id_role == 1) {
                 return redirect()->route('/admin');
             } elseif ($req->id_role == 2) {
-                return redirect()->route('/');
+                return redirect()->route('/dokter');
             } else {
                 return redirect()->route('/');
             }

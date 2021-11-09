@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AntriansController;
 use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\DokterController;
 
 
 
@@ -51,3 +52,6 @@ Route::get('edit-dokter/{id}', [AdminController::class, 'edit']);
 Route::delete('delete-dokter', [AdminController::class, 'destroy']);
 
 //Route::resource('/poli', PoliController::class);
+
+//dokter
+Route::get('/dokter', [DokterController::class, 'index'])->name('/dokter');

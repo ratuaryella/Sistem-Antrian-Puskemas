@@ -26,6 +26,7 @@
                 {{ Session::get('error') }}
             </div>
             @endif
+
             <div class="inputBx">
                 <label for="inputName">Name</label>
                 <input type="text" name="name" id="inputName" class="form-control" required autofocus>
@@ -48,7 +49,7 @@
             </div>
 
             <button class="btn btn-lg btn-primary" type="submit">
-                Masuk
+                Daftar
             </button>
         </form>
     </div>

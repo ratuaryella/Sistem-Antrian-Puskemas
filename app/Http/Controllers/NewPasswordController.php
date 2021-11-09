@@ -85,5 +85,7 @@ class NewPasswordController extends Controller
         if ($status == Password::PASSWORD_RESET) {
             return redirect()->route('login');
         }
+
+        return redirect()->route('reset-password')->with(['error' => 'Email yang dimasukkan salah']);
     }
 }
