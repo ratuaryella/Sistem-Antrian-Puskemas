@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,12 +32,14 @@ class AdminController
 
     public function kelolaDokter()
     {
-
-        $dokters = DB::table('users')->where('id_role', 2)->get();
-        $polis =  DB::table('polis')->get();
-        return view('admin.dokter')
-            ->with('dokters', $dokters)
-            ->with('polis', $polis);
+        if (Auth::check()) {
+            $dokters = DB::table('users')->where('id_role', 2)->get();
+            $polis = DB::table('polis')->get();
+            return view('admin.dokter')
+                ->with('dokters', $dokters)
+                ->with('polis', $polis);
+        }
+        return redirect()->route('login');
     }
 
     public function store(Request $request)
@@ -76,8 +79,21 @@ class AdminController
 
     public function kelolaPoli()
     {
+        if (Auth::check()) {
+            $polis = DB::table('polis')->get();
+            return view('admin.poli')->with('polis', $polis);
+        }
+        return redirect()->route('login');
+    }
 
+    public function kelolaAntrian(){
+        if (Auth::check()) {
+        $antrians =  DB::table('antrians')->get();
         $polis =  DB::table('polis')->get();
-        return view('admin.poli')->with('polis', $polis);
+        return view('admin.index')
+            ->with('antrians', $antrians)
+            ->with('polis', $polis);
+        }
+        return redirect()->route('login');
     }
 }

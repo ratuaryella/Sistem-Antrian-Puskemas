@@ -51,9 +51,9 @@ class AntriansController extends Controller
     public function store(Request $request)
     {
         $tanggal = Carbon::now();
-        $req = session()->get('user');
+        $reqs = session()->get('user');
 
-        $req = $req->id;
+        $req = $reqs->id;
         $id_terakhir_poliBased = DB::table('antrians')
             ->where('id_poli', $request->id_poli)
             ->max('id_antrian');
@@ -85,7 +85,10 @@ class AntriansController extends Controller
         $antrian->status = 0;
         $antrian->save();
 
-        return redirect()->route('/');
+        if($reqs->id_role == 3)
+            return redirect()->route('/');
+        if($reqs->id_role == 2)
+            return redirect()->route('/kelola-antrian');
     }
 
     /**

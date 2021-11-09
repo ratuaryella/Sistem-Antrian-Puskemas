@@ -23,6 +23,6 @@ class DokterController
             ->orderBy('status')
             ->get();
 
-        return var_dump($);
+//        return var_dump($);
     }
 }

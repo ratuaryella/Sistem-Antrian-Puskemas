@@ -11,8 +11,8 @@
 
         <!-- Admin -->
         <li class="">
-            <a href="/admin" class="{{ Request::path() ==  'admin' ? 'active' : ''  }}">
-                <i class='fas fa-portrait me-2'></i>
+            <a href="/kelola-antrian" class="{{ Request::path() ==  'admin' ? 'active' : ''  }}">
+                <i class='fas fa-portrait me-2' ></i>
                 <span class="links_name">Antrian</span>
             </a>
             <span class="tooltip">Antrian</span>
