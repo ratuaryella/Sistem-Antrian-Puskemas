@@ -40,8 +40,7 @@ Route::post('/reset-password', [NewPasswordController::class, 'reset']);
 
 //Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('/admin');
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/kelola-antrian',[AdminController::class, 'kelolaAntrian'])->name('/kelola-antrian');
+Route::get('/kelola-antrian', [AdminController::class, 'kelolaAntrian'])->name('/kelola-antrian');
 Route::get('/kelola-dokter', [AdminController::class, 'kelolaDokter']);
 Route::get('/kelola-poli', [AdminController::class, 'kelolaPoli']);
 Route::post('add-poli', [PoliController::class, 'store']);
@@ -58,3 +57,4 @@ Route::delete('delete-dokter', [AdminController::class, 'destroy']);
 
 //dokter
 Route::get('/dokter', [DokterController::class, 'index'])->name('/dokter');
+Route::post('/ubah-status', [DokterController::class, 'updateStatus'])->name('/ubah-status');

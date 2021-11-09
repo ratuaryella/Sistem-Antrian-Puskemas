@@ -80,7 +80,7 @@ class AuthController extends Controller
             if ($req->id_role == 1) {
                 return redirect()->route('/admin');
             } elseif ($req->id_role == 2) {
-                return redirect()->route('/kelola-antrian');
+                return redirect()->route('/dokter');
             } else {
                 return redirect()->route('/');
             }
