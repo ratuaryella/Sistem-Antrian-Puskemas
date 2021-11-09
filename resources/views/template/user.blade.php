@@ -11,8 +11,6 @@
 
     <title>Antrian Puskesmas</title>
 
-
-
 </head>
 
 <body>

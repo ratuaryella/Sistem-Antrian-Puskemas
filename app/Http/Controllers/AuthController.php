@@ -52,6 +52,7 @@ class AuthController extends Controller
             //Login Success
             return redirect()->route('/');
         }
+
         return view('login');
     }
 
