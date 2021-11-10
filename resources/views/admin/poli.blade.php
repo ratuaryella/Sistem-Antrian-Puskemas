@@ -37,7 +37,7 @@
                                         <td>{{ $poli->deskripsi  }}</td>
                                         <td>
                                             <button value="{{$poli->id_poli}}" class="btn btn-success editbtn" type="button">Edit</button>
-                                            <button value="{{$poli->id_poli}}" type="button" class="btn btn-danger deletebtn">Delete</button>
+                                            <button value="{{$poli->id_poli}}" type="button" class="btn btn-danger deletebtn">Hapus</button>
                                         </td>
                                     </tr>
                                 @endforeach

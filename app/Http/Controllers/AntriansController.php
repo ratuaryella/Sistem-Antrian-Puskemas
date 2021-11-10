@@ -87,7 +87,7 @@ class AntriansController extends Controller
 
         if($reqs->id_role == 3)
             return redirect()->route('/');
-        if($reqs->id_role == 2)
+        if($reqs->id_role == 1)
             return redirect()->route('/kelola-antrian');
     }
 
@@ -116,7 +116,11 @@ class AntriansController extends Controller
      */
     public function edit($id)
     {
-        //
+        $antrians = Antrians::find($id);
+        return response()->json([
+            'status' => 200,
+            'antrians' => $antrians,
+                ]);
     }
 
     /**
@@ -143,7 +147,13 @@ class AntriansController extends Controller
         //
     }
 
-    public function show_antrian()
+    public function update_antrian(Request $request)
     {
+        $id = $request->input('id_antrian');
+        Antrians::where('id_antrian',$id)->update([
+                "status"=> $request->input('status')]
+        );
+
+        return redirect()->route('/kelola-antrian');
     }
 }

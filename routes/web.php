@@ -52,6 +52,8 @@ Route::post('add-dokter', [AdminController::class, 'store']);
 Route::get('edit-dokter/{id}', [AdminController::class, 'edit']);
 Route::put('update-dokter', [AdminController::class, 'update']);
 Route::delete('delete-dokter', [AdminController::class, 'destroy']);
+Route::put('update-antrian', [AntriansController::class, 'update_antrian']);
+
 
 //Route::resource('/poli', PoliController::class);
 

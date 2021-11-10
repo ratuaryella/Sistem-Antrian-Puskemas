@@ -31,16 +31,44 @@
                                 @if ($antrian->status == 0)
                                 <td class="text-secondary">Menunggu</td>
                                 @elseif($antrian->status == 1)
-                                <td class=".text-warning">Temu Dokter</td>
+                                <td class="text-warning">Temu Dokter</td>
                                 @elseif($antrian->status == 2)
                                 <td class="text-success">Selesai</td>
                                 @elseif($antrian->status == 3)
                                 <td class="text-danger">Batal</td>
                                 @endif
-                                {{-- <td>--}}
-                                {{-- <button value="{{$poli->id_poli}}" class="btn btn-success editbtn" type="button">Edit</button>--}}
-                                {{-- <button value="{{$poli->id_poli}}" type="button" class="btn btn-danger deletebtn">Delete</button>--}}
-                                {{-- </td>--}}
+
+                                @if($antrian->status == 0)
+                                 <td>
+                                     <table>
+                                         <tr>
+                                             <form action="{{ url('update-antrian') }}" method="POST">
+                                                 {{csrf_field()}}
+                                                 {{ method_field('PUT') }}
+                                                 <button type="submit" class="btn btn-success masukbtn">
+                                                     <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}"/>
+                                                     <input type="hidden" name="status" value="1"/>
+                                                     Masuk
+                                                 </button>
+                                             </form>
+                                         </tr>
+                                         &nbsp;
+                                         <tr>
+                                             <form action="{{ url('update-antrian') }}" method="POST">
+                                                 {{csrf_field()}}
+                                                 {{ method_field('PUT') }}
+                                                 <button class="btn btn-danger batalbtn" type="submit">
+                                                     <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}"/>
+                                                     <input type="hidden" name="status" value="3"/>
+                                                     Batal
+                                                 </button>
+                                             </form>
+                                         </tr>
+                                     </table>
+                                 </td>
+                                @else
+                                <td></td>
+                                @endif
                             </tr>
                             @endforeach
                         </table>
@@ -85,8 +113,9 @@
 <script>
     $(document).ready(function() {
 
-        $(document).on('click', '.deletebtn', function() {
+        $(document).on('click', '.batalbtn', function() {
             var id = $(this).val();
+            $('#').data('block', 'something');
             $('#deleteModal').modal('show');
             $('#delete_id').val(id);
         });

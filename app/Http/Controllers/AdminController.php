@@ -23,11 +23,12 @@ class AdminController
             App::abort(403);
         }
 
-        $antrian = DB::table('antrians')->whereDate('tanggal', Carbon::today())->get();
+        $antrians = DB::table('antrians')->whereDate('tanggal', Carbon::today())->get();
+        $polis =  DB::table('polis')->get();
 
-        return view('admin.index', [
-            'antrians', $antrian
-        ]);
+        return view('admin.index')
+            ->with('antrians', $antrians)
+            ->with('polis', $polis);
     }
 
     public function kelolaDokter()
@@ -88,7 +89,7 @@ class AdminController
 
     public function kelolaAntrian(){
         if (Auth::check()) {
-        $antrians =  DB::table('antrians')->get();
+        $antrians =  DB::table('antrians')->whereIn('status', [0,1])->orderBy('status', 'desc')->get();
         $polis =  DB::table('polis')->get();
         return view('admin.index')
             ->with('antrians', $antrians)

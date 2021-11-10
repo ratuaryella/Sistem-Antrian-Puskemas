@@ -52,7 +52,7 @@
             <div class="wrap">
                 <a href="{{ route('/logout') }}" class="button-login" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}</a>
+                    {{ __('Keluar') }}</a>
             </div>
             <form id="logout-form" action="{{ route('/logout') }}" method="POST" class="d-none">
                 {{ csrf_field() }}

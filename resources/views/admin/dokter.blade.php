@@ -34,7 +34,7 @@
                                 <td>{{ $dokter->nomor_induk  }}</td>
                                 <td>
                                     <button value="{{$dokter->id}}" class="btn btn-success editbtn" type="button">Edit</button>
-                                    <button value="{{$dokter->id}}" type="button" class="btn btn-danger deletebtn">Delete</button>
+                                    <button value="{{$dokter->id}}" type="button" class="btn btn-danger deletebtn">Hapus</button>
                                 </td>
                             </tr>
                             @endforeach
