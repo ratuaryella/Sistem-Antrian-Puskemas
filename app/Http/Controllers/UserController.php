@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App;
 
 
-use function PHPUnit\Framework\isEmpty;
-
 class UserController extends Controller
 {
     public function index()
@@ -31,13 +29,12 @@ class UserController extends Controller
                 ->where('status', '=', 0)
                 ->get();
 
-            // $no_antrian = $no_antrian[0];
+
 
             return view('user/dashboard', [
                 'allPoli' => $allPoli,
                 'antrian' => $antrian,
             ]);
-            // return var_dump($user);
         }
         return redirect()->route('login');
     }

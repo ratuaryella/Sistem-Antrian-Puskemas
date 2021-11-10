@@ -78,7 +78,7 @@ class AuthController extends Controller
             $req = session()->get('user');
 
             if ($req->id_role == 1) {
-                return redirect()->route('/admin');
+                return redirect()->route('/kelola-antrian');
             } elseif ($req->id_role == 2) {
                 return redirect()->route('/dokter');
             } else {

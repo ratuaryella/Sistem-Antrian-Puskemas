@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 use App;
 
+
+
+
 class DokterController
 {
     public function index()
@@ -34,9 +37,8 @@ class DokterController
             'current' => $currect,
             'allAntrian' => $allAntrian
         ]);
-
-        // return var_dump($currect);
     }
+
 
     public function updateStatus(Request $request)
     {
@@ -48,5 +50,17 @@ class DokterController
 
 
         return redirect()->route('/dokter');
+    }
+
+
+    public function showPicker()
+    {
+        $countDate = 0;
+        $countMonth = 0;
+
+        return view('try', [
+            'countDate' => $countDate,
+            'countMonth' => $countMonth,
+        ]);
     }
 }

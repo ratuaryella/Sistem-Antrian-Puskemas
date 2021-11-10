@@ -23,10 +23,15 @@ class AdminController
             App::abort(403);
         }
 
+        $countDate = 0;
+        $countMonth = 0;
+
         $antrians = DB::table('antrians')->whereDate('tanggal', Carbon::today())->get();
         $polis =  DB::table('polis')->get();
 
         return view('admin.index')
+            ->with('countDate', $countDate)
+            ->with('countMonth', $countMonth)
             ->with('antrians', $antrians)
             ->with('polis', $polis);
     }
@@ -87,13 +92,18 @@ class AdminController
         return redirect()->route('login');
     }
 
-    public function kelolaAntrian(){
+    public function kelolaAntrian()
+    {
         if (Auth::check()) {
-        $antrians =  DB::table('antrians')->whereIn('status', [0,1])->orderBy('status', 'desc')->get();
-        $polis =  DB::table('polis')->get();
-        return view('admin.index')
-            ->with('antrians', $antrians)
-            ->with('polis', $polis);
+            $countDate = 0;
+            $countMonth = 0;
+            $antrians =  DB::table('antrians')->whereIn('status', [0, 1])->orderBy('status', 'desc')->get();
+            $polis =  DB::table('polis')->get();
+            return view('admin.index')
+                ->with('countDate', $countDate)
+                ->with('countMonth', $countMonth)
+                ->with('antrians', $antrians)
+                ->with('polis', $polis);
         }
         return redirect()->route('login');
     }
@@ -101,14 +111,55 @@ class AdminController
     public function update(Request $request)
     {
         $id = $request->input('idEdit');
-        User::where('id',$id)->update([
-                "name"=> $request->input('namaEdit'),
-                "email"=>$request->input('emailEdit'),
-                "nomor_induk"=> $request->input('noindukEdit'),
-                "id_poli"=>$request->input('poliEdit'),
-                "id_role"=>2]
+        User::where('id', $id)->update(
+            [
+                "name" => $request->input('namaEdit'),
+                "email" => $request->input('emailEdit'),
+                "nomor_induk" => $request->input('noindukEdit'),
+                "id_poli" => $request->input('poliEdit'),
+                "id_role" => 2
+            ]
         );
 
         return redirect()->back()->with('status', 'Data Berhasil Diubah');
+    }
+
+
+    public function countVisitorByDate(Request $request)
+    {
+        if ($request->tanggal == null) {
+            $countDate = 0;
+            $month = substr($request->bulan, 5);
+            $year = substr($request->bulan, 0, 4);
+
+            $countMonth = DB::table('antrians')
+                ->whereMonth('tanggal', $month)
+                ->whereYear('tanggal', $year)
+                ->count();
+
+            $antrians = DB::table('antrians')->whereDate('tanggal', Carbon::today())->get();
+            $polis =  DB::table('polis')->get();
+
+            return view('admin.index')
+                ->with('countDate', $countDate)
+                ->with('countMonth', $countMonth)
+                ->with('antrians', $antrians)
+                ->with('polis', $polis);
+        } elseif ($request->bulan ==  null) {
+            $countMonth = 0;
+
+            $countDate = DB::table('antrians')
+                ->where('tanggal', $request->tanggal)
+                ->count();
+
+            $antrians = DB::table('antrians')->whereDate('tanggal', Carbon::today())->get();
+            $polis =  DB::table('polis')->get();
+
+            return view('admin.index')
+                ->with('countDate', $countDate)
+                ->with('countMonth', $countMonth)
+                ->with('antrians', $antrians)
+                ->with('polis', $polis);
+        }
     }
 }

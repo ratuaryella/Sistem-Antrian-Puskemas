@@ -60,3 +60,4 @@ Route::put('update-antrian', [AntriansController::class, 'update_antrian']);
 //dokter
 Route::get('/dokter', [DokterController::class, 'index'])->name('/dokter');
 Route::post('/ubah-status', [DokterController::class, 'updateStatus'])->name('/ubah-status');
+Route::get('date', [AdminController::class, 'countVisitorByDate'])->name('date');

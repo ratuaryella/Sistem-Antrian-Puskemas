@@ -1,7 +1,43 @@
 @extends('template.admin')
 @section('body')
+
 <div class="container-fluid">
     <div class="row justify-content-center">
+
+
+        <div class="col-md-6" style="margin-bottom:10px;">
+            <div class="card">
+                <div class="card-header">
+                    <form action="{{ route('date') }}" method="GET">
+                        <label for="tanggal">Pilih Tanggal:</label>
+                        <input type="date" id="tanggal" name="tanggal">
+                        <input type="submit" class="btn-sm btn-success ">
+                    </form>
+                </div>
+                <div class="card-body text-center">
+
+                    <h1 class="card-title">{{ $countDate}}</h1>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="margin-bottom:10px;">
+            <div class=" card">
+                <div class="card-header">
+                    <form action="{{ route('date') }}" method="GET">
+                        <label for="tanggal">Pilih Bulan:</label>
+                        <input type="month" id="bulan" name="bulan">
+                        <input type="submit" class="btn-sm btn-success ">
+                    </form>
+                </div>
+                <div class="card-body text-center">
+                    <h1 class="card-title">{{ $countMonth}}</h1>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -39,33 +75,33 @@
                                 @endif
 
                                 @if($antrian->status == 0)
-                                 <td>
-                                     <table>
-                                         <tr>
-                                             <form action="{{ url('update-antrian') }}" method="POST">
-                                                 {{csrf_field()}}
-                                                 {{ method_field('PUT') }}
-                                                 <button type="submit" class="btn btn-success masukbtn">
-                                                     <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}"/>
-                                                     <input type="hidden" name="status" value="1"/>
-                                                     Masuk
-                                                 </button>
-                                             </form>
-                                         </tr>
-                                         &nbsp;
-                                         <tr>
-                                             <form action="{{ url('update-antrian') }}" method="POST">
-                                                 {{csrf_field()}}
-                                                 {{ method_field('PUT') }}
-                                                 <button class="btn btn-danger batalbtn" type="submit">
-                                                     <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}"/>
-                                                     <input type="hidden" name="status" value="3"/>
-                                                     Batal
-                                                 </button>
-                                             </form>
-                                         </tr>
-                                     </table>
-                                 </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <form action="{{ url('update-antrian') }}" method="POST">
+                                                {{csrf_field()}}
+                                                {{ method_field('PUT') }}
+                                                <button type="submit" class="btn btn-success masukbtn">
+                                                    <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}" />
+                                                    <input type="hidden" name="status" value="1" />
+                                                    Masuk
+                                                </button>
+                                            </form>
+                                        </tr>
+                                        &nbsp;
+                                        <tr>
+                                            <form action="{{ url('update-antrian') }}" method="POST">
+                                                {{csrf_field()}}
+                                                {{ method_field('PUT') }}
+                                                <button class="btn btn-danger batalbtn" type="submit">
+                                                    <input type="hidden" name="id_antrian" value="{{$antrian->id_antrian}}" />
+                                                    <input type="hidden" name="status" value="3" />
+                                                    Batal
+                                                </button>
+                                            </form>
+                                        </tr>
+                                    </table>
+                                </td>
                                 @else
                                 <td></td>
                                 @endif

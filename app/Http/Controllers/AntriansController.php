@@ -12,17 +12,7 @@ use function PHPUnit\Framework\isEmpty;
 class AntriansController extends Controller
 {
 
-    // private $connection;
 
-    // public function __construct(Connection $connection)
-    // {
-    //     $this->connection = $connection;
-    // }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $antrian =  Antrians::all();
@@ -33,21 +23,6 @@ class AntriansController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $tanggal = Carbon::now();
@@ -85,18 +60,12 @@ class AntriansController extends Controller
         $antrian->status = 0;
         $antrian->save();
 
-        if($reqs->id_role == 3)
+        if ($reqs->id_role == 3)
             return redirect()->route('/');
-        if($reqs->id_role == 1)
+        if ($reqs->id_role == 1)
             return redirect()->route('/kelola-antrian');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $antrian = Antrians::findOrfail($id);
@@ -108,50 +77,22 @@ class AntriansController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $antrians = Antrians::find($id);
         return response()->json([
             'status' => 200,
             'antrians' => $antrians,
-                ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        ]);
     }
 
     public function update_antrian(Request $request)
     {
         $id = $request->input('id_antrian');
-        Antrians::where('id_antrian',$id)->update([
-                "status"=> $request->input('status')]
+        Antrians::where('id_antrian', $id)->update(
+            [
+                "status" => $request->input('status')
+            ]
         );
 
         return redirect()->route('/kelola-antrian');

@@ -2,6 +2,7 @@
 @section('containers')
 <section>
 
+
     <div class="card">
         <div class="card-header text-center">
             Nomor Antrian
@@ -43,6 +44,8 @@
         @endforeach
 
     </div>
+
+
 
 </section>
 

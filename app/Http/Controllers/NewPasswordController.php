@@ -24,7 +24,7 @@ class NewPasswordController extends Controller
         $getToken = $request->token;
         session(['token' => $getToken]);
         $token = session()->get('token');
-        // return var_dump($token);
+
         return redirect()->route('reset-password');
     }
 
@@ -66,7 +66,7 @@ class NewPasswordController extends Controller
             'password' => ['required', 'confirmed', RulesPassword::defaults()],
         ]);
 
-        // return var_dump($request->token);
+
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
