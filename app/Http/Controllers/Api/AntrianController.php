@@ -52,4 +52,19 @@ class AntrianController extends Controller
             'antrian' => $antrian
         ]);
     }
+
+    public function riwayat(Request $request)
+    {
+        $riwayat = DB::table('antrians')
+            ->join('users', 'users.id', '=', 'antrians.id_user')
+            ->join('polis', 'polis.id_poli', '=', 'antrians.id_poli')
+            ->select(DB::raw('antrians.tanggal,antrians.no_antrian,polis.nama, (SELECT users.name FROM users WHERE BINARY antrians.id_poli = BINARY users.id_poli) AS dokter, antrians.status'))
+            ->where('antrians.id_user', '=', $request->id_user)
+            ->orderBy('antrians.status')
+            ->get();
+
+        return response()->json([
+            'riwayat' => $riwayat
+        ]);
+    }
 }

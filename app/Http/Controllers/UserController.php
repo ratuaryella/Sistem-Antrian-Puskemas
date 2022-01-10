@@ -38,4 +38,22 @@ class UserController extends Controller
         }
         return redirect()->route('login');
     }
+
+    public function riwayat()
+    {
+        $user = session()->get('user');
+        $user = $user->id;
+
+        $riwayat = DB::table('antrians')
+            ->join('users', 'users.id', '=', 'antrians.id_user')
+            ->join('polis', 'polis.id_poli', '=', 'antrians.id_poli')
+            ->select(DB::raw('antrians.tanggal,antrians.no_antrian,polis.nama, (SELECT users.name FROM users WHERE BINARY antrians.id_poli = BINARY users.id_poli) AS dokter, antrians.status'))
+            ->where('antrians.id_user', '=', $user)
+            ->orderBy('antrians.status')
+            ->get();
+
+        return view('user/riwayat', [
+            'riwayat' => $riwayat
+        ]);
+    }
 }

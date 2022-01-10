@@ -40,8 +40,7 @@ Route::post('tambah', [PoliController::class, 'addAntrian']);
 Route::get('antrian', [AntrianController::class, 'showAntrianById']);
 Route::get('antrian-byPoli', [AntrianController::class, 'getAllAntrianByPoli']);
 Route::post('ubah-status', [AntrianController::class, 'updateStatus']);
-Route::post('ubah-status', [PoliController::class, 'updateStatus']);
+Route::get('riwayat', [AntrianController::class, 'riwayat']);
 
 //Route::resource('antrian', AntrianController::class);
 Route::get('all-poli', [PoliController::class, 'getAllPoli']);
-

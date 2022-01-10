@@ -18,8 +18,20 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
-            <h3 class="navbar-brand">Puskesmas </h3>
+            <a style="text-decoration:none" href="{{ route('/')  }}">
+                <h3 class="navbar-brand">Puskesmas </h3>
+            </a>
             <ul class="nav justify-content-end">
+
+
+                <li class="nav-item">
+                    <div class="wrap">
+                        <a style="text-decoration:none; color: white" href="{{ route('/riwayat') }}">
+                            {{ __('Riwayat') }}</a>
+                    </div>
+
+                </li>
+
                 <li class="nav-item">
                     <div class="wrap">
                         <a href="{{ route('/logout') }}" class="button" onclick="event.preventDefault();

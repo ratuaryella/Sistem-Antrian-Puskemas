@@ -35,7 +35,7 @@ Route::post('/forgot-password', [NewPasswordController::class, 'forgotPassword']
 Route::get('/token', [NewPasswordController::class, 'token'])->name('token');
 Route::get('/reset-password', [NewPasswordController::class, 'showFormResetPass'])->name('reset-password');
 Route::post('/reset-password', [NewPasswordController::class, 'reset']);
-// Route::resource('/poli', PoliController::class);
+Route::get('/riwayat', [UserController::class, 'riwayat'])->name('/riwayat');
 
 
 //Admin
