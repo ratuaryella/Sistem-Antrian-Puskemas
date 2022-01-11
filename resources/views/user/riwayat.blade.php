@@ -25,10 +25,6 @@
                     <td>: {{ $riw->dokter }}</td>
                 </tr>
                 <tr>
-                    <td>Poli</td>
-                    <td>: {{ $riw->nama }}</td>
-                </tr>
-                <tr>
                     <td>Status</td>
                     @if($riw->status == 3)
                     <td>: Batal</td>
