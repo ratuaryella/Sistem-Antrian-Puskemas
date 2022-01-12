@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Tambah Antrian</button>
+                    <button type="submit" class="btn btn-primary" target="_blank">Tambah Antrian</button>
                 </div>
             </form>
         </div>

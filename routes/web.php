@@ -36,6 +36,7 @@ Route::get('/token', [NewPasswordController::class, 'token'])->name('token');
 Route::get('/reset-password', [NewPasswordController::class, 'showFormResetPass'])->name('reset-password');
 Route::post('/reset-password', [NewPasswordController::class, 'reset']);
 Route::get('/riwayat', [UserController::class, 'riwayat'])->name('/riwayat');
+Route::get('/print', [AntriansController::class, 'prints'])->name('/print');
 
 
 //Admin

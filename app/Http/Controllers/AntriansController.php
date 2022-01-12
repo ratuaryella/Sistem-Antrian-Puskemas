@@ -63,7 +63,7 @@ class AntriansController extends Controller
         if ($reqs->id_role == 3)
             return redirect()->route('/');
         if ($reqs->id_role == 1)
-            return redirect()->route('/kelola-antrian');
+            return redirect()->route('/print');
     }
 
     public function show($id)
@@ -96,5 +96,14 @@ class AntriansController extends Controller
         );
 
         return redirect()->route('/kelola-antrian');
+    }
+
+    public function prints()
+    {
+        $antrians = Antrians::orderBy('id_antrian', 'DESC')->get()->first();
+        $polis = DB::table('polis')->get();
+        return view('admin.print')
+            ->with('antrians', $antrians)
+            ->with('polis', $polis);
     }
 }
